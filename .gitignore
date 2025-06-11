@@ -1,0 +1,54 @@
+# Build and binary output
+/build/
+/build
+/CV1.dir/
+/CV1.sln
+/CV1.vcxproj*
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Debug/
+/x64/
+*.obj
+*.pdb
+*.ilk
+*.tlog/
+*.dll
+*.exe
+*.log
+*.user
+*.filters
+*.recipe
+*.stamp*
+*.yaml
+*.bin
+
+# VSCode and IDE
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Data and generated files
+res/puzzle_state.bin
+res/puzzle_state.json
+res/puzzles.dat
+res/puzzles.json
+src/make_puzzles/puzzles.dat
+src/make_puzzles/puzzles.json
+
+# Fonts (if not to be tracked)
+# res/NotoSansJP-Regular.ttf
+
+# Ignore generated puzzle images (if not to be tracked)
+src/gen_puzzle_data/*.jpg
+
+# Misc
+*.bak
+*.tmp

@@ -1,0 +1,108 @@
+{
+  "puzzles": [
+    {
+      "name": "Der Wanderer über dem Nebelmeer",
+      "artist": "Caspar David Friedrich",
+      "offset": 0,
+      "length": 76314,
+      "block_size": 3,
+      "difficulty": "Easy"
+    },
+    {
+      "name": "La persistència de la memòria",
+      "artist": "Salvador Dalí",
+      "offset": 1860411,
+      "length": 109281,
+      "block_size": 3,
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Skrik",
+      "artist": "Edvard Munch",
+      "offset": 232222,
+      "length": 130978,
+      "block_size": 3,
+      "difficulty": "Easy"
+    },
+    {
+      "name": "神奈川沖浪裏",
+      "artist": "北斎",
+      "offset": 528294,
+      "length": 286654,
+      "block_size": 3,
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Creazione di Adamo",
+      "artist": "Michelangelo",
+      "offset": 1205641,
+      "length": 212549,
+      "block_size": 4,
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Meisje met de Parel",
+      "artist": "Johannes Vermeer",
+      "offset": 1103645,
+      "length": 101996,
+      "block_size": 4,
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Mr and Mrs Andrews",
+      "artist": "Thomas Gainsborough",
+      "offset": 1969692,
+      "length": 183928,
+      "block_size": 3,
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Nighthawks",
+      "artist": "Edward Hopper",
+      "offset": 363200,
+      "length": 165094,
+      "block_size": 4,
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Toren Van Babel",
+      "artist": "Pieter Bruegel",
+      "offset": 1638730,
+      "length": 221681,
+      "block_size": 4,
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Guernica",
+      "artist": "Pablo Picasso",
+      "offset": 1418190,
+      "length": 220540,
+      "block_size": 4,
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Impression, soleil levant",
+      "artist": "Claude Monet",
+      "offset": 76314,
+      "length": 155908,
+      "block_size": 4,
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Sterrennacht",
+      "artist": "Vincent Van Gogh",
+      "offset": 2153620,
+      "length": 286196,
+      "block_size": 4,
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Запорожцы пишут письмо турецкому султану",
+      "artist": "Илья Репин",
+      "offset": 814948,
+      "length": 288697,
+      "block_size": 4,
+      "difficulty": "Hard"
+    }
+  ]
+}
