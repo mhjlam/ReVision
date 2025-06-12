@@ -37,7 +37,6 @@ __pycache__/
 
 # Data and generated files
 res/puzzle_state.bin
-res/puzzle_state.json
 res/puzzles.dat
 res/puzzles.json
 src/make_puzzles/puzzles.dat
