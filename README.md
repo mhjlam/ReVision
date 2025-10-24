@@ -37,6 +37,10 @@ To add or regenerate puzzles, use the provided Python script:
 
 ## Build Requirements
 
-- OpenCV 4.5
-- FreeType (for Unicode text rendering)
-- Python 3 with Pillow (for generating puzzle data)
+- `OpenCV 4.5`.
+- `FreeType` for Unicode text rendering.
+- `Python 3` with `Pillow` for generating puzzle data.
+
+## License
+
+This software is licensed under the [CC BY-NC-SA License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
