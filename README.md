@@ -2,6 +2,9 @@
 
 A visually polished, robust sliding puzzle game implemented in C++ with OpenCV. The game features a collection of famous artwork puzzles, Unicode text rendering, persistent progress tracking, and a modern, user-friendly interface.
 
+![Screenshot](media/revision.gif)
+
+
 ## Features
 
 - **Sliding Puzzles:** Generates sliding puzzle from an image, subdivided into a 3x3, 4x4, 5x5, etc. grid.

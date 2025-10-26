@@ -22,13 +22,19 @@
 
 // Static wrappers for OpenCV callbacks
 void App::on_mouse(int event, int x, int y, int flags, void* userdata) {
-    if (userdata) static_cast<App*>(userdata)->on_mouse_impl(event, x, y, flags, userdata);
+    if (userdata) {
+        static_cast<App*>(userdata)->on_mouse_impl(event, x, y, flags, userdata);
+    }
 }
 void App::wait_click_callback(int event, int x, int y, int flags, void* userdata) {
-    if (userdata) static_cast<App*>(userdata)->wait_click_callback_impl(event, x, y, flags, userdata);
+    if (userdata) {
+        static_cast<App*>(userdata)->wait_click_callback_impl(event, x, y, flags, userdata);
+    }
 }
 void App::landing_page_mouse_callback(int event, int x, int y, int flags, void* userdata) {
-    if (userdata) static_cast<App*>(userdata)->landing_page_mouse_callback_impl(event, x, y, flags, userdata);
+    if (userdata) {
+        static_cast<App*>(userdata)->landing_page_mouse_callback_impl(event, x, y, flags, userdata);
+    }
 }
 void App::main_menu_mouse_callback(int event, int x, int y, int flags, void* userdata) {
     if (userdata) static_cast<App*>(userdata)->main_menu_mouse_callback_impl(event, x, y, flags, userdata);
@@ -47,6 +53,7 @@ void App::handle_puzzle_solved(MouseState& mouse_state, std::map<std::string, bo
     if (!mouse_state.solved) {
         mouse_state.solved = true;
         solved_map[mouse_state.puzzle_key] = true;
+
         mouse_state.image_altered = mouse_state.image_original.clone();
         draw_text_overlay(mouse_state.image_altered, "Finito!", "Press Escape to return", 56, 36);
         cv::imshow(WIN_NAME, mouse_state.image_altered);
@@ -72,11 +79,13 @@ void App::show_start_screen(const cv::Mat& image_original, int block_width, int 
 bool App::wait_for_mouse_click(const std::string& winname) {
     ClickState state;
     cv::setMouseCallback(winname, wait_click_callback, &state);
+
     while (!state.clicked) {
         if (cv::waitKey(1) == 27) {
             break;
         }
     }
+
     cv::setMouseCallback(winname, nullptr, nullptr);
     return state.clicked;
 }
@@ -110,8 +119,12 @@ void App::draw_text_overlay(cv::Mat& mat, const std::string& line1, const std::s
     int text1_y = cy + sz1.height;
     int text2_y = text1_y + sz2.height + 10;
 
-    if (!line1.empty()) { ft2.draw_text(mat, line1, cv::Point(cx, text1_y), cv::Scalar(255, 255,  80), 2, true); }
-    if (!line2.empty()) { ft2.draw_text(mat, line2, cv::Point(cx, text2_y), cv::Scalar(255, 255, 255), 2, true); }
+    if (!line1.empty()) { 
+        ft2.draw_text(mat, line1, cv::Point(cx, text1_y), cv::Scalar(255, 255,  80), 2, true);
+    }
+    if (!line2.empty()) { 
+        ft2.draw_text(mat, line2, cv::Point(cx, text2_y), cv::Scalar(255, 255, 255), 2, true);
+    }
 }
 
 // Callback implementations
@@ -142,6 +155,7 @@ void App::on_mouse_impl(int event, int x, int y, int, void* userdata) {
             mat = state.image_original.clone();
             draw_text_overlay(mat, "Finito!", "Press Escape to return", 56, 36);
         }
+
         cv::imshow(WIN_NAME, mat);
     }
 }
@@ -165,13 +179,15 @@ void App::landing_page_mouse_callback_impl(int event, int mx, int my, int, void*
     int gx = (mx - p->margin) / thumb_total;
     int gy = (my - p->margin) / thumb_total;
 
-    if (gx < 0 || gx >= grid || gy < 0 || gy >= grid)
+    if (gx < 0 || gx >= grid || gy < 0 || gy >= grid) {
         return;
+    }
 
     int idx = gy * grid + gx;
     int pick = p->start + idx;
-    if (pick >= p->end)
+    if (pick >= p->end) {
         return;
+    }
 
     int x = p->margin + gx * thumb_total;
     int y = p->margin + gy * thumb_total;
@@ -207,13 +223,17 @@ void App::main_menu_mouse_callback_impl(int event, int x, int y, int flags, void
         return;
     }
 
-    if (event != cv::EVENT_LBUTTONDOWN) return;
+    if (event != cv::EVENT_LBUTTONDOWN) {
+        return;
+    }
 
     if (new_hover == "left" && params->page > 0) {
         *params->nav_dir = -1;
-    } else if (new_hover == "right" && params->page < params->total_pages - 1) {
+    }
+    else if (new_hover == "right" && params->page < params->total_pages - 1) {
         *params->nav_dir = 1;
-    } else if (new_hover == "image") {
+    }
+    else if (new_hover == "image") {
         *params->selected = params->page;
     }
 }
@@ -224,8 +244,9 @@ PuzzleSession App::create_puzzle_session(const PuzzleMeta& meta, const std::map<
     session.solved = solved_map.contains(session.puzzle_key) && solved_map.at(session.puzzle_key);
 
     session.image_original = Puzzle::load_image(PUZZLE_DATA_FILE, meta);
-    if (session.image_original.empty())
+    if (session.image_original.empty()) {
         throw std::runtime_error("Failed to load image for puzzle: " + session.puzzle_key);
+    }
 
     int n = meta.block_size;
     session.layout = Puzzle::make_puzzle_layout(session.image_original, n, n);

@@ -30,7 +30,6 @@ public:
     bool wait_for_mouse_click(const std::string& winname);
     void draw_text_overlay(cv::Mat& mat, const std::string& line1, const std::string& line2, int font_height1, int font_height2);
 
-    // --- Add declarations for private helpers ---
 private:
     void on_mouse_impl(int event, int x, int y, int, void* userdata);
     void wait_click_callback_impl(int event, int, int, int, void* userdata);

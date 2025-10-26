@@ -33,6 +33,7 @@ void Menu::calc_preview_layout(int thumb_w, int thumb_h, int win_w, int win_h, c
     else {
         draw_h = max_h;
         draw_w = static_cast<int>(draw_h * aspect);
+        
         if (draw_w < min_w) {
             draw_w = min_w;
             draw_h = static_cast<int>(draw_w / aspect);

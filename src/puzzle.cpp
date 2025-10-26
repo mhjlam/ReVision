@@ -79,7 +79,9 @@ Puzzle::Puzzle(const PuzzleMeta& meta, const std::map<std::string, bool>& solved
     session.solved = solved_map.count(session.puzzle_key) ? solved_map.at(session.puzzle_key) : false;
 
     cv::Mat image_original = load_image(PUZZLE_DATA_FILE, meta);
-    if (image_original.empty()) throw std::runtime_error("Image load failed");
+    if (image_original.empty()) {
+        throw std::runtime_error("Image load failed");
+    }
     session.image_original = image_original; // Store in session
 
     int num_blocks = meta.block_size;
@@ -93,10 +95,14 @@ Puzzle::Puzzle(const PuzzleMeta& meta, const std::map<std::string, bool>& solved
 
 // Add static mouse callback for puzzle sliding
 void Puzzle::on_mouse(int event, int x, int y, int /*flags*/, void* userdata) {
-    if (event != cv::EVENT_LBUTTONDOWN) { return; }
+    if (event != cv::EVENT_LBUTTONDOWN) { 
+        return;
+    }
 
     MouseState* state = static_cast<MouseState*>(userdata);
-    if (!state || state->solved) { return; }
+    if (!state || state->solved) { 
+        return;
+    }
 
     int bx = (x / state->block_width) * state->block_width;
     int by = (y / state->block_height) * state->block_height;
@@ -117,7 +123,9 @@ void Puzzle::play(std::map<std::string, bool>& solved_map, int& last_page, App* 
     int num_blocks = session.meta.block_size;
     app_cb_userdata->show_start_screen(session.layout.padded, session.layout.block_width, session.layout.block_height);
 
-    if (!app_cb_userdata->wait_for_mouse_click(WIN_NAME)) return;
+    if (!app_cb_userdata->wait_for_mouse_click(WIN_NAME)) {
+        return;
+    }
 
     cv::Mat image_altered = session.layout.padded.clone();
     fill_image_from_permutation(image_altered, session.layout.padded, session.perm, num_blocks, num_blocks, session.layout.block_width, session.layout.block_height);
@@ -215,21 +223,28 @@ void Puzzle::fill_image_from_permutation(cv::Mat& image_altered, const cv::Mat& 
 int Puzzle::permutation_manhattan_distance(const std::vector<int>& perm, int num_blocks_x, int num_blocks_y) {
     int dist = 0;
     for (size_t idx = 0; idx < perm.size(); ++idx) {
-        if (perm[idx] == 0) continue;
-        dist += std::abs(static_cast<int>(idx % num_blocks_x) - perm[idx] % num_blocks_x)
-              + std::abs(static_cast<int>(idx / num_blocks_x) - perm[idx] / num_blocks_x);
+        if (perm[idx] == 0) {
+            continue;
+        }
+
+        dist += std::abs(static_cast<int>(idx % num_blocks_x) - perm[idx] % num_blocks_x);
+        dist += std::abs(static_cast<int>(idx / num_blocks_x) - perm[idx] / num_blocks_x);
     }
     return dist;
 }
 
 void Puzzle::swap_block(int x, int y, MouseState &state) {
-    if (!Util::is_adjacent(x, y, state.empty_x, state.empty_y, state.block_width, state.block_height)) return;
+    if (!Util::is_adjacent(x, y, state.empty_x, state.empty_y, state.block_width, state.block_height)) {
+        return;
+    }
 
     int copy_w = std::min(state.block_width, std::min(state.cols - x, state.cols - state.empty_x));
     int copy_h = std::min(state.block_height, std::min(state.rows - y, state.rows - state.empty_y));
     cv::Rect from_rect(x, y, copy_w, copy_h), to_rect(state.empty_x, state.empty_y, copy_w, copy_h);
 
-    if (from_rect.size() != to_rect.size() || copy_w <= 0 || copy_h <= 0) return;
+    if (from_rect.size() != to_rect.size() || copy_w <= 0 || copy_h <= 0) {
+        return;
+    }
 
     cv::Mat temp;
     state.image_altered(from_rect).copyTo(temp);
@@ -291,7 +306,9 @@ void Puzzle::shuffle_permutation(std::vector<int>& perm, int num_blocks_x, int n
         for (int i = 0; i < shuffle_moves; ++i) {
             bool avoid_zero = (i > 0);
             auto neighbors = get_empty_neighbors(empty_idx, num_blocks_x, num_blocks_y, perm, avoid_zero);
-            if (neighbors.empty()) break;
+            if (neighbors.empty()) {
+                break;
+            }
 
             int nidx = neighbors[rng.uniform(0, static_cast<int>(neighbors.size()))];
             std::swap(perm[empty_idx], perm[nidx]);
@@ -299,7 +316,8 @@ void Puzzle::shuffle_permutation(std::vector<int>& perm, int num_blocks_x, int n
         }
 
         challenge = permutation_manhattan_distance(perm, num_blocks_x, num_blocks_y);
-    } while (challenge < min_challenge);
+    }
+    while (challenge < min_challenge);
 }
 
 std::vector<cv::Rect> Puzzle::make_blocks(int cols, int rows, int block_width, int block_height) {
@@ -318,6 +336,9 @@ std::vector<cv::Rect> Puzzle::make_blocks(int cols, int rows, int block_width, i
 
 PuzzleLayout Puzzle::make_puzzle_layout(const cv::Mat& image, int num_blocks_x, int num_blocks_y) {
     PuzzleLayout layout;
-    layout.padded = pad_image_to_blocks(image, num_blocks_x, num_blocks_y, layout.cols, layout.rows, layout.block_width, layout.block_height);
+    layout.padded = pad_image_to_blocks(image, 
+        num_blocks_x, num_blocks_y, 
+        layout.cols, layout.rows, 
+        layout.block_width, layout.block_height);
     return layout;
 }

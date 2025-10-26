@@ -9,7 +9,6 @@
 #include FT_FREETYPE_H
 #include <opencv2/opencv.hpp>
 
-
 // Minimal UTF-8 to Unicode codepoint decoder
 inline std::vector<uint32_t> utf8_to_codepoints(const std::string& utf8) {
     size_t i = 0;
@@ -42,7 +41,6 @@ inline std::vector<uint32_t> utf8_to_codepoints(const std::string& utf8) {
 
     return codepoints;
 }
-
 
 class FT2TextRenderer {
 public:

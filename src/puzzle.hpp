@@ -1,8 +1,6 @@
 #pragma once
 
-#include "main.hpp" // Ensure full type definitions are available
-
-class App; // Forward declaration only
+#include "main.hpp"
 
 #include <map>
 #include <string>
@@ -11,6 +9,7 @@ class App; // Forward declaration only
 #include <nlohmann/json.hpp>
 #include <opencv2/opencv.hpp>
 
+class App;
 
 class Puzzle {
 public:
