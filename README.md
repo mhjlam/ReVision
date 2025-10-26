@@ -1,9 +1,12 @@
-# ReVision: Sliding Puzzle
+# ReVision
+
+Sliding puzzle game.
+
+<p align="center">
+   <img src="media/revision.gif" alt="Demo Animation" width="720"/>
+</p>
 
 A visually polished, robust sliding puzzle game implemented in C++ with OpenCV. The game features a collection of famous artwork puzzles, Unicode text rendering, persistent progress tracking, and a modern, user-friendly interface.
-
-![Screenshot](media/revision.gif)
-
 
 ## Features
 
