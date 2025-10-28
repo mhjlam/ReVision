@@ -1,9 +1,12 @@
 # ReVision
 
-Sliding puzzle game.
+**Sliding Puzzle Game**
+
+> Maurits Lam  
+> 2025
 
 <p align="center">
-   <img src="media/revision.gif" alt="Demo Animation" width="720"/>
+   <img src="media/revision.gif" alt="Demo Animation" height="400"/>
 </p>
 
 A visually polished, robust sliding puzzle game implemented in C++ with OpenCV. The game features a collection of famous artwork puzzles, Unicode text rendering, persistent progress tracking, and a modern, user-friendly interface.
